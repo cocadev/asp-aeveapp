@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:AevApp.Controls;assembly=AevApp"
+             x:Class="AevApp.App">
+    <Application.Resources>
+
+        <!-- Application resource dictionary -->
+        <ResourceDictionary>
+
+            <!-- Color -->
+            <Color x:Key="AevLightGrey">#E7E4FF</Color>
+            <Color x:Key="AevBlueGrey">#80A2E4</Color>
+            <Color x:Key="AevLightPurple">#705C9B</Color>
+            <Color x:Key="AevPurple">#3A265B</Color>
+            <Color x:Key="AevDarkBlue">#1A2754</Color>
+            <Color x:Key="AevLightBlue">#4F8AB6</Color>
+            <Color x:Key="AevLightGreen">#60EBB9</Color>
+            <Color x:Key="AevGreen">#2AC57A</Color>
+            <Color x:Key="AevLightRed">#FF7BA3</Color>
+            <Color x:Key="AevRed">#C81B4F</Color>
+
+
+
+            <Color x:Key="WhiteColor">#FFFFFFFF</Color>
+            <Color x:Key="BlackColor">#FF000000</Color>
+            <Color x:Key="GrayColor">#374048</Color>
+
+            <Color x:Key="PrimaryBlueColor">#ff00448d</Color>
+            <Color x:Key="PrimaryYellowColor">#fffdbf56</Color>
+            <Color x:Key="CustomRedOneColor">#E04343</Color>
+            <Color x:Key="CustomRedTwoColor">#C75050</Color>
+
+            <Color x:Key="EntryBorderColor">#78BFD7</Color>
+
+            <!-- Font -->
+            <x:String x:Key="OpenSans">fonts/OpenSans-Light</x:String>
+            <x:String x:Key="OpenSansBold">fonts/OpenSans-Regular</x:String>
+
+
+            <x:String x:Key="RalewayFont">fonts/Raleway-Regular</x:String>
+            <x:String x:Key="RalewayLightFont">fonts/Raleway-Light</x:String>
+            <x:String x:Key="RalewayMediumFont">fonts/Raleway-Medium</x:String>
+            <x:String x:Key="RalewayBoldFont">fonts/Raleway-Bold</x:String>
+            <x:String x:Key="MaterialIconsFont">fonts/MaterialIcons-Regular</x:String>
+            <x:String x:Key="FontAwesome">fonts/FontAwesome</x:String>
+
+            <!-- Font Size -->
+            <x:Double x:Key="SmallText">12</x:Double>
+            <x:Double x:Key="MediumText">16</x:Double>
+            <x:Double x:Key="LargeText">24</x:Double>
+
+            <!-- Border radius -->
+            <x:Int32 x:Key="LargeBorderRadius">67</x:Int32>
+            <x:Int32 x:Key="MediumBorderRadius">13</x:Int32>
+            <x:Int32 x:Key="SmallBorderRadius">7</x:Int32>
+
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}"></Setter>
+            </Style>
+
+            <Style TargetType="controls:ButtonEx">
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}"></Setter>
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryBlueColor}"></Setter>
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"></Setter>
+                <Setter Property="BorderColor" Value="{StaticResource PrimaryBlueColor}"></Setter>
+            </Style>
+
+            <Style TargetType="controls:FormEntry">
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}"></Setter>
+            </Style>
+
+            <ControlTemplate x:Key="BasicLayout">
+                <ContentPresenter HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="Transparent"></ContentPresenter>
+            </ControlTemplate>
+        </ResourceDictionary>
+        <!-- Application resource dictionary -->
+
+
+    </Application.Resources>
+</Application>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="EnvName" value="Dev" />
+    <add key="ApiBaseUrl" value="http://10.0.2.2:60130/api/v1" />
+    <!-- <add key="ApiBaseUrl" value="https://aevmeldev01.azurewebsites.net/api/v1" /> -->
+    <!-- <add key="ApiBaseUrl" value="https://melaevonline01.azurewebsites.net/api/v1" /> -->
+    <add key="clientId" value="3" />
+    <add key="clientSecret" value="3#TXdZ5@@ywQ+CF9" />
+    <add key="airport" value="1" />
+    <add key="location" value="3" />
+    <add key="useSampleImages" value="false"/>
+    <add key="StorageAccountName" value="aevmeldev01storage" />
+    <add key="StorageAccountKey" value="4C81v1M3mZQH5oWRCnFo/RK304+8dQ0EaI9AxAapWuU6vfnYIBak+Nm0nQOQrWCkDHHflrfc9XgSd5yIuQM6AQ==" />
+    <add key="BlobContainerName" value="asicscans" />
+    <add key="ComputerVisionKey" value="bb2d124039314989bc95f86dc8968c47" />
+    <add key="ScreenOrientation" value="portrait" />
+  </appSettings>
+</configuration>

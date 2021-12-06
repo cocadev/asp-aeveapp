@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<view:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               x:Class="AevApp.View.SecurityCheckSubmissionPage_Portrait"
+               xmlns:view="clr-namespace:AevApp.View;assembly=AevApp"
+               xmlns:controls="clr-namespace:AevApp.Controls;assembly=AevApp"
+               xmlns:controls1="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+               xmlns:converter="clr-namespace:AevApp.Converter;assembly=AevApp"
+               NavigationPage.HasNavigationBar="False"
+               ControlTemplate="{StaticResource BasicLayout}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:NegateBooleanConverter x:Key="inverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <Grid AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="25*" />
+                    <RowDefinition Height="65" />
+                </Grid.RowDefinitions>
+                <controls:AevHeader Username="{Binding Username}" Role="{Binding Role}"
+                                TabCommand="{Binding LogoutCommand}" Grid.Row="0" />
+
+                <Grid Grid.Row="1" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"></RowDefinition>
+                        <RowDefinition Height="22"></RowDefinition>
+                        <RowDefinition Height="4*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="6*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="4*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <!-- IMAGE -->
+                        <Grid Grid.Column="0" Grid.Row="0" RowSpan="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="{Binding PersonPhotoImageSource}" HorizontalOptions="FillAndExpand" Grid.Row="0"/>
+                            <Image Source="{Binding AsicPhotoImageSource}" HorizontalOptions="FillAndExpand" Grid.Row="1"/>
+                        </Grid>
+                        <!-- IMAGE -->
+
+                        <!-- ASIC INFO -->
+                        <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <controls:LabelEx Text="FIRST NAME" FontFamily="{StaticResource OpenSansBold}" FontSize="{StaticResource SmallText}" TextColor="{StaticResource AevDarkBlue}" Grid.Row="0" Grid.Column="0" Margin="0,10,0,0"/>
+                            <controls:LabelEx Text="LAST NAME" FontFamily="{StaticResource OpenSansBold}" FontSize="{StaticResource SmallText}" TextColor="{StaticResource AevDarkBlue}" Grid.Row="1" Grid.Column="0" Margin="0,10,0,0"/>
+                            <controls:LabelEx Text="ASIC ID" FontFamily="{StaticResource OpenSansBold}" FontSize="{StaticResource SmallText}" TextColor="{StaticResource AevDarkBlue}" Grid.Row="2" Grid.Column="0" Margin="0,10,0,0"/>
+                            <controls:LabelEx Text="AIRPORT CODE" FontFamily="{StaticResource OpenSansBold}" FontSize="{StaticResource SmallText}" TextColor="{StaticResource AevDarkBlue}" Grid.Row="3" Grid.Column="0" Margin="0,10,0,0"/>
+                            <controls:LabelEx Text="EXPIRES" FontFamily="{StaticResource OpenSansBold}" FontSize="{StaticResource SmallText}" TextColor="{StaticResource AevDarkBlue}" Grid.Row="4" Grid.Column="0" Margin="0,15,0,0"/>
+                            <controls:LabelEx Text="COMPANY" FontFamily="{StaticResource OpenSansBold}" FontSize="{StaticResource SmallText}" TextColor="{StaticResource AevDarkBlue}" Grid.Row="5" Grid.Column="0" Margin="0,10,0,0"/>
+                            <controls:LabelEx Text="NOTES" FontFamily="{StaticResource OpenSansBold}" FontSize="{StaticResource SmallText}" TextColor="{StaticResource AevDarkBlue}" Grid.Row="6" Grid.Column="0" Margin="0,10,0,0"/>
+                            <controls:LabelEx Text="FACIAL" FontFamily="{StaticResource OpenSansBold}" FontSize="{StaticResource SmallText}" TextColor="{StaticResource AevDarkBlue}" Grid.Row="7" Grid.Column="0" Margin="0,10,0,0"/>
+
+                            <controls:FormEntry Text="{Binding FirstName, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" HasTitle="False"/>
+                            <controls:FormEntry Text="{Binding LastName, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" HasTitle="False"/>
+
+                            <controls:FormEntry Text="{Binding AsicId, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" HasTitle="False"/>
+                            <!-- <controls:ButtonEx Text="Search" Command="{Binding UpdateAsicIdCommand}" Grid.Column="1"></controls:ButtonEx> -->
+                            <Image Source="search.png" Grid.Row="2" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding UpdateAsicIdCommand}"></TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                            <!-- <Picker Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Airports}" Title="Airport Code" SelectedItem="{Binding AirportCode}" VerticalOptions="Center"></Picker> -->
+                            <controls:AevDropdown Grid.Row="3" Grid.Column="1" Text="{Binding SelectedAirportValue}" VerticalOptions="Center" TabCommand="{Binding SelectAirport}"></controls:AevDropdown>
+                            <!-- <controls:FormEntry Text="{Binding AirportCode, Mode=TwoWay}"  Grid.Row="3" Grid.Column="1" HasTitle="False"/> -->
+
+                            <Grid Grid.Row="4" Grid.Column="1" VerticalOptions="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <controls:AevDropdown Text="{Binding SelectedYearValue}" Grid.Column="0" VerticalOptions="Center"
+                                                      TabCommand="{Binding SelectYear}"></controls:AevDropdown>
+                                <!-- <Picker ItemsSource="{Binding Years}" ItemDisplayBinding="{Binding Value}" Title="Year" SelectedItem="{Binding SelectedYear}" Grid.Column="0" VerticalOptions="Center"></Picker> -->
+                                <controls:AevDropdown Text="{Binding SelectedMonthValue}" Grid.Column="1" VerticalOptions="Center"
+                                                      TabCommand="{Binding SelectMonth}"></controls:AevDropdown>
+                                <!-- <Picker ItemsSource="{Binding Months}" ItemDisplayBinding="{Binding Value}" Title="Month" SelectedItem="{Binding SelectedMonth}" Grid.Column="1" VerticalOptions="Center"></Picker> -->
+                            </Grid>
+
+                            <controls:FormEntry Text="{Binding Company, Mode=TwoWay}"  Grid.Row="5" Grid.Column="1" HasTitle="False"/>
+
+                            <controls:AevDropdown Text="{Binding SelectedNotes}" VerticalOptions="Center" Grid.Row="6" Grid.Column="1"
+                                                  TabCommand="{Binding SelectNotes}"></controls:AevDropdown>
+
+                            <controls:LabelEx Text="{Binding FaceMatchConfidence}" FontSize="{StaticResource MediumText}" 
+                                              LineBreakMode="TailTruncation" Grid.Row="7" Grid.Column="1" Margin="0,10,0,0"/>
+                        </Grid>
+                        <!-- ASIC INFO -->
+                    </Grid>
+
+                    <BoxView Grid.Row="1" Margin="30, 10, 30, 10" HeightRequest="2" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource AevLightGrey}"></BoxView>
+
+                    <Grid Grid.Row="2">
+                        <!-- SECURITY SCAN -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="4*"></RowDefinition>
+                            <RowDefinition Height="2"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="2"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <!-- SECURITY SCAN ITEMS -->
+                        <StackLayout Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding Suspended, Converter={StaticResource inverter}}">
+                            <controls:LabelEx Text="{Binding TierName}" FontSize="{StaticResource LargeText}" HorizontalOptions="Start" Margin="30, 0, 30, 3" />
+
+                            <controls1:FlowListView FlowColumnCount="2" FlowItemsSource="{Binding SecurityCheckItems}"
+                                            SeparatorVisibility="None" RowHeight="48"
+                                            FlowItemTappedCommand="{Binding ToggleSecurityCheckCommand}"
+                                            HasUnevenRows="false" Margin="22, 0, 22, 0">
+                                <controls1:FlowListView.FlowColumnTemplate>
+                                    <DataTemplate>
+                                        <Frame HasShadow="False" CornerRadius="12" BorderColor="{Binding BorderColor}" BackgroundColor="{Binding BackgroundColor}" 
+                                               HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="2" Padding="0">
+                                            <FlexLayout HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" AlignItems="Center" JustifyContent="SpaceBetween">
+                                                <controls:LabelEx Text="{Binding Title}" FontFamily="{StaticResource OpenSans}"
+                                                  TextColor="{Binding TextColor}" VerticalOptions="FillAndExpand" Margin="12, 0, 0, 0"/>
+                                                <Image Source="Check.png" HorizontalOptions="End" 
+                                                       VerticalOptions="Center" Margin="0,0,15,0" HeightRequest="16"></Image>
+                                            </FlexLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </controls1:FlowListView.FlowColumnTemplate>
+                            </controls1:FlowListView>
+                        </StackLayout>
+                        <Label Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding Suspended}" Text="Suspended" 
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource AevRed}" FontSize="48"></Label>
+                        <!-- SECURITY SCAN ITEMS -->
+
+                        <BoxView Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource AevLightGrey}" Margin="30, 0, 30, 0"></BoxView>
+
+                        <!-- FORM BUTTONS -->
+                        <FlexLayout Grid.Row="2" AlignItems="Center" JustifyContent="SpaceBetween" Margin="30, 5, 30, 5">
+                            <controls:AevImageButton DefaultStateImageSource="backButton.png" PressedStateImageSource="backButtonPressed.png" 
+                                                     Command="{Binding CancelCommand}" HorizontalOptions="Start" HeightRequest="50"/>
+
+                            <controls:AevImageButton DefaultStateImageSource="CheckButtonLight.png" PressedStateImageSource="CheckButtonLightPressed.png"
+                                                     Command="{Binding SubmitCommand}"  HorizontalOptions="End" HeightRequest="60"/>
+                        </FlexLayout>
+                        <!-- FORM BUTTONS -->
+
+                        <!-- SECURITY SCAN -->
+
+                    </Grid>
+                </Grid>
+
+
+                <Image Grid.Row="2" Margin="10, 0, 10, 10" Source="progressBar4.png" VerticalOptions="End"></Image>
+            </Grid>
+
+            <!-- Notes Multi Choice Dialog -->
+            <AbsoluteLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" IsVisible="{Binding IsSelectingNotes}">
+                <BoxView BackgroundColor="{StaticResource AevLightPurple}" Opacity="0.9" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"></BoxView>
+
+                <StackLayout BackgroundColor="{StaticResource WhiteColor}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.75, 0.75">
+                    <controls:LabelEx Text="Notes" FontSize="{StaticResource LargeText}" Margin="10" />
+
+                    <controls1:FlowListView FlowColumnCount="1" FlowItemsSource="{Binding Notes}" FlowItemTappedCommand="{Binding TapNoteCommand}"
+                                            SeparatorVisibility="None" RowHeight="58"
+                                            HasUnevenRows="false" HorizontalOptions="FillAndExpand">
+                        <controls1:FlowListView.FlowColumnTemplate>
+                            <DataTemplate>
+                                <controls:AevSelectItem HorizontalOptions="FillAndExpand" Text="{Binding Title}" IsSelected="{Binding Checked}" 
+                                                        BackgroundColor="{Binding BackgroundColor}" RowMargin="5,0,5,10"></controls:AevSelectItem>
+                            </DataTemplate>
+                        </controls1:FlowListView.FlowColumnTemplate>
+                    </controls1:FlowListView>
+
+                    <controls:ButtonEx Text="Confirm" Command="{Binding ConfirmSelectedNotes}" BackgroundColor="{StaticResource AevGreen}"
+                                       CornerRadius="{StaticResource LargeBorderRadius}"  HorizontalOptions="Center" Margin="10"></controls:ButtonEx>
+                </StackLayout>
+            </AbsoluteLayout>
+
+            <!-- Month Dialog -->
+            <AbsoluteLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" IsVisible="{Binding IsSelectingMonth}">
+                <BoxView BackgroundColor="{StaticResource AevLightPurple}" Opacity="0.9" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"></BoxView>
+
+                <StackLayout BackgroundColor="{StaticResource WhiteColor}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.5, 0.75">
+                    <controls:LabelEx Text="Month" FontSize="{StaticResource LargeText}" Margin="10" />
+
+                    <controls1:FlowListView FlowColumnCount="1" FlowItemsSource="{Binding Months}" FlowItemTappedCommand="{Binding TapMonthCommand}"
+                                            SeparatorVisibility="None" RowHeight="58"
+                                            HasUnevenRows="false" HorizontalOptions="FillAndExpand">
+                        <controls1:FlowListView.FlowColumnTemplate>
+                            <DataTemplate>
+                                <controls:AevSelectItem HorizontalOptions="FillAndExpand" Text="{Binding Title}" IsSelected="{Binding Checked}" 
+                                                        BackgroundColor="{Binding BackgroundColor}" RowMargin="50,0,50,10"></controls:AevSelectItem>
+                            </DataTemplate>
+                        </controls1:FlowListView.FlowColumnTemplate>
+                    </controls1:FlowListView>
+                </StackLayout>
+            </AbsoluteLayout>
+
+            <!-- Year Dialog -->
+            <AbsoluteLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" IsVisible="{Binding IsSelectingYear}">
+                <BoxView BackgroundColor="{StaticResource AevLightPurple}" Opacity="0.9" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"></BoxView>
+
+                <StackLayout BackgroundColor="{StaticResource WhiteColor}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.5, 0.75">
+                    <controls:LabelEx Text="Year" FontSize="{StaticResource LargeText}" Margin="10" />
+
+                    <controls1:FlowListView FlowColumnCount="1" FlowItemsSource="{Binding Years}" FlowItemTappedCommand="{Binding TapYearCommand}"
+                                            SeparatorVisibility="None" RowHeight="58"
+                                            HasUnevenRows="false" HorizontalOptions="FillAndExpand">
+                        <controls1:FlowListView.FlowColumnTemplate>
+                            <DataTemplate>
+                                <controls:AevSelectItem HorizontalOptions="FillAndExpand" Text="{Binding Title}" IsSelected="{Binding Checked}" 
+                                                        BackgroundColor="{Binding BackgroundColor}" RowMargin="50,0,50,10"></controls:AevSelectItem>
+                            </DataTemplate>
+                        </controls1:FlowListView.FlowColumnTemplate>
+                    </controls1:FlowListView>
+                </StackLayout>
+            </AbsoluteLayout>
+
+            <!-- Airport Dialog -->
+            <AbsoluteLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" IsVisible="{Binding IsSelectingAiport}">
+                <BoxView BackgroundColor="{StaticResource AevLightPurple}" Opacity="0.9" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"></BoxView>
+
+                <StackLayout BackgroundColor="{StaticResource WhiteColor}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.5, 0.75">
+                    <controls:LabelEx Text="Airport" FontSize="{StaticResource LargeText}" Margin="10" />
+
+                    <controls1:FlowListView FlowColumnCount="1" FlowItemsSource="{Binding Airports}" FlowItemTappedCommand="{Binding TapAirportCommand}"
+                                            SeparatorVisibility="None" RowHeight="58"
+                                            HasUnevenRows="false" HorizontalOptions="FillAndExpand">
+                        <controls1:FlowListView.FlowColumnTemplate>
+                            <DataTemplate>
+                                <controls:AevSelectItem HorizontalOptions="FillAndExpand" Text="{Binding Title}" IsSelected="{Binding Checked}" 
+                                                        BackgroundColor="{Binding BackgroundColor}" RowMargin="50,0,50,10"></controls:AevSelectItem>
+                            </DataTemplate>
+                        </controls1:FlowListView.FlowColumnTemplate>
+                    </controls1:FlowListView>
+                </StackLayout>
+            </AbsoluteLayout>
+
+            <controls:AevOverlay AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" IsVisible="{Binding ShowOverlay, Mode=TwoWay}"
+                                 LoadingMessage="{Binding LoadingMessage}" IsActivityIndicatorVisible="{Binding IsActivityIndicatorVisible}"
+                                 DialogMessage="{Binding DialogMessage}" ConfirmBtnText="{Binding ConfirmBtnText}"
+                                 CancelBtnText="{Binding CancelBtnText}" ConfirmCommand="{Binding ConfirmDialogCommand}" 
+                                 CancelCommand="{Binding CancelDialogCommand}" IsDialogVisible="{Binding IsDialogVisible}"></controls:AevOverlay>
+
+            <AbsoluteLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" IsVisible="{Binding IsVehicleDetailsDialogVisible}">
+                <BoxView BackgroundColor="{StaticResource AevLightPurple}" Opacity="0.9" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"></BoxView>
+
+                <Grid BackgroundColor="{StaticResource WhiteColor}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.5, 0.25" Padding="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                        <ColumnDefinition Width="6*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <controls:LabelEx Text="Vehicle Rego: " FontSize="Medium" Grid.Row="0" Grid.Column="0" Margin="0,10,0,0"/>
+                    <controls:FormEntry Text="{Binding VehicleRego, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" HasTitle="False"/>
+
+                    <controls:LabelEx Text="Vehicle Type: " FontSize="Medium"  Grid.Row="1" Grid.Column="0" Margin="0,10,0,0"/>
+                    <controls:AevDropdown Text="{Binding SelectedVehicleTypeValue}" Grid.Row="1" Grid.Column="1" VerticalOptions="Center"
+                                          TabCommand="{Binding SelectVehicleType}"></controls:AevDropdown>
+
+                <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                    <controls:ButtonEx Text="OK" Command="{Binding HideVehicleDetailsDialogCommand}" />
+                </StackLayout>
+            </Grid>
+            </AbsoluteLayout>
+
+
+            <!-- Vehicle Type Dialog -->
+            <AbsoluteLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" IsVisible="{Binding IsSelectingVehicleType}">
+                <BoxView BackgroundColor="{StaticResource AevLightPurple}" Opacity="0.9" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"></BoxView>
+
+                <StackLayout BackgroundColor="{StaticResource WhiteColor}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.5, 0.75">
+                    <controls:LabelEx Text="Vehicle Type" FontSize="{StaticResource LargeText}" Margin="10" />
+
+                    <controls1:FlowListView FlowColumnCount="1" FlowItemsSource="{Binding VehicleTypes}" FlowItemTappedCommand="{Binding TapVehicleTypeCommand}"
+                                            SeparatorVisibility="None" RowHeight="58"
+                                            HasUnevenRows="false" HorizontalOptions="FillAndExpand">
+                        <controls1:FlowListView.FlowColumnTemplate>
+                            <DataTemplate>
+                                <controls:AevSelectItem HorizontalOptions="FillAndExpand" Text="{Binding Title}" IsSelected="{Binding Checked}" 
+                                                        BackgroundColor="{Binding BackgroundColor}" RowMargin="50,0,50,10"></controls:AevSelectItem>
+                            </DataTemplate>
+                        </controls1:FlowListView.FlowColumnTemplate>
+                    </controls1:FlowListView>
+                </StackLayout>
+            </AbsoluteLayout>
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</view:PageBase>

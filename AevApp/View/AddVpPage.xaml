@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               x:Class="AevApp.View.AddVpPage"
+               xmlns:view="clr-namespace:AevApp.View;assembly=AevApp"
+               xmlns:controls="clr-namespace:AevApp.Controls;assembly=AevApp"
+               xmlns:controls1="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+               NavigationPage.HasNavigationBar="False"
+               ControlTemplate="{StaticResource BasicLayout}">
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <controls:AevHeader TabCommand="{Binding LogoutCommand}" CancelCommand="{Binding ResetCommand}" Username="{Binding Username}" Role="{Binding Role}"></controls:AevHeader>
+                <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                    <controls:LabelEx FontSize="{StaticResource MediumText}" TextColor="{StaticResource AevDarkBlue}" Text="VP Number"></controls:LabelEx>
+                    <controls:FormEntry HasTitle="False" WidthRequest="250" FontFamily="{StaticResource OpenSansBold}" TextColor="{StaticResource AevDarkBlue}" Text="{Binding AsicId, Mode=TwoWay}" Required="True" ValidationTrigger="{Binding ValidateFormTrigger}"></controls:FormEntry>
+                    <controls:LabelEx FontSize="{StaticResource MediumText}" TextColor="{StaticResource AevDarkBlue}" Text="First Name"></controls:LabelEx>
+                    <controls:FormEntry HasTitle="False" WidthRequest="250" TextColor="{StaticResource AevDarkBlue}" Text="{Binding FirstName, Mode=TwoWay}" Required="True" ValidationTrigger="{Binding ValidateFormTrigger}"></controls:FormEntry>
+                    <controls:LabelEx FontSize="{StaticResource MediumText}" TextColor="{StaticResource AevDarkBlue}" Text="Surname"></controls:LabelEx>
+                    <controls:FormEntry HasTitle="False" WidthRequest="250" TextColor="{StaticResource AevDarkBlue}" Text="{Binding LastName, Mode=TwoWay}"  Required="True" ValidationTrigger="{Binding ValidateFormTrigger}"></controls:FormEntry>
+                    <controls:LabelEx FontSize="{StaticResource MediumText}" TextColor="{StaticResource AevDarkBlue}" Text="Identification No"></controls:LabelEx>
+                    <controls:FormEntry HasTitle="False" WidthRequest="250" TextColor="{StaticResource AevDarkBlue}" Text="{Binding IdentificationNumber, Mode=TwoWay}"  Required="True" ValidationTrigger="{Binding ValidateFormTrigger}"></controls:FormEntry>
+                    <controls:LabelEx FontSize="{StaticResource MediumText}" TextColor="{StaticResource AevDarkBlue}" Text="Company"></controls:LabelEx>
+                    <controls:FormEntry HasTitle="False" WidthRequest="250" TextColor="{StaticResource AevDarkBlue}" Text="{Binding Company, Mode=TwoWay}"  Required="True" ValidationTrigger="{Binding ValidateFormTrigger}"></controls:FormEntry>
+
+                    <controls:LabelEx FontSize="{StaticResource MediumText}" TextColor="{StaticResource AevDarkBlue}" Text="Expires"></controls:LabelEx>
+                    <controls:FormEntry HasTitle="False" WidthRequest="250" TextColor="{StaticResource AevDarkBlue}" Text="{Binding Expires, Mode=TwoWay}" IsDateTimeEntry="True" ValidationTrigger="{Binding ValidateFormTrigger}"></controls:FormEntry>
+                    <controls:LabelEx FontSize="{StaticResource MediumText}" TextColor="{StaticResource AevDarkBlue}" Text="Airport Code"></controls:LabelEx>
+                    <controls:AevDropdown Text="{Binding AirportCode}" VerticalOptions="Center" TabCommand="{Binding SelectAirportCommand}"></controls:AevDropdown>
+                    <FlexLayout WidthRequest="250" AlignItems="Center" JustifyContent="SpaceBetween" >
+                        <controls:AevImageButton DefaultStateImageSource="backButton.png" PressedStateImageSource="backButtonPressed.png"
+                                                 Command="{Binding CancelCommand}" HorizontalOptions="Start" HeightRequest="50"/>
+
+                        <controls:AevImageButton DefaultStateImageSource="CheckButtonLight.png" PressedStateImageSource="CheckButtonLightPressed.png"
+                                                 Command="{Binding SubmitCommand}"  HorizontalOptions="End" HeightRequest="60"/>
+                    </FlexLayout>
+                    <!-- <controls:CameraView HeightRequest="400" Camera="Rear" HorizontalOptions="FillAndExpand" OnPhotoCommand="{Binding TestCommand}"></controls:CameraView> -->
+                </StackLayout>
+                <!-- <controls:CameraView HeightRequest="600" Camera="Rear" HorizontalOptions="FillAndExpand"  -->
+                <!--                      CaptureOnTap="False" /> -->
+
+            </StackLayout>
+
+
+            <AbsoluteLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" IsVisible="{Binding IsSelectingAirport}">
+                <BoxView BackgroundColor="{StaticResource AevLightPurple}" Opacity="0.9" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0, 0, 1, 1"></BoxView>
+
+                <StackLayout BackgroundColor="{StaticResource WhiteColor}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.5, 0.75">
+                    <controls:LabelEx Text="Month" FontSize="{StaticResource LargeText}" Margin="10" />
+
+                    <controls1:FlowListView FlowColumnCount="1" FlowItemsSource="{Binding Airports}" FlowItemTappedCommand="{Binding TapAirportCommand}"
+                                            SeparatorVisibility="None" RowHeight="58"
+                                            HasUnevenRows="false" HorizontalOptions="FillAndExpand">
+                        <controls1:FlowListView.FlowColumnTemplate>
+                            <DataTemplate>
+                                <controls:AevSelectItem HorizontalOptions="FillAndExpand" Text="{Binding Title}" IsSelected="{Binding Checked}"
+                                                        BackgroundColor="{Binding BackgroundColor}" RowMargin="50,0,50,10"></controls:AevSelectItem>
+                            </DataTemplate>
+                        </controls1:FlowListView.FlowColumnTemplate>
+                    </controls1:FlowListView>
+                </StackLayout>
+            </AbsoluteLayout>
+            <controls:AevOverlay AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" IsVisible="{Binding ShowOverlay, Mode=TwoWay}"
+                                 LoadingMessage="{Binding LoadingMessage}" IsActivityIndicatorVisible="{Binding IsActivityIndicatorVisible}"
+                                 DialogMessage="{Binding DialogMessage}" ConfirmBtnText="{Binding ConfirmBtnText}"
+                                 CancelBtnText="{Binding CancelBtnText}" ConfirmCommand="{Binding ConfirmDialogCommand}"
+                                 CancelCommand="{Binding CancelDialogCommand}" IsDialogVisible="{Binding IsDialogVisible}"></controls:AevOverlay>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</view:PageBase>

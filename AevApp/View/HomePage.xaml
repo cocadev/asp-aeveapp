@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AevApp.View.HomePage"
+		     xmlns:view="clr-namespace:AevApp.View;assembly=AevApp"
+               xmlns:controls="clr-namespace:AevApp.Controls;assembly=AevApp"
+               NavigationPage.HasNavigationBar="False"
+		     ControlTemplate="{StaticResource BasicLayout}">
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <controls:BackgroundBoxView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                                        StartColor="{StaticResource AevDarkBlue}" EndColor="{StaticResource AevPurple}"></controls:BackgroundBoxView>
+            <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="2.6*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackLayout VerticalOptions="Center" Grid.Row="0" Grid.Column="1">
+                    <Image Source="MelbourneAirportLogo.png"></Image>
+                </StackLayout>
+                <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+                    <controls:FormEntry Title="USERNAME" WidthRequest="250" Text="{Binding Username, Mode=TwoWay}" IsValid="{Binding IsUsernameValid, Mode=TwoWay}" ErrorMessage="Invalid username"></controls:FormEntry>
+                    <controls:FormEntry Title="PASSWORD" WidthRequest="250" Text="{Binding Password, Mode=TwoWay}" IsValid="{Binding IsPasswordValid, Mode=TwoWay}" ErrorMessage="Invalid password" 
+                                        IsPassword="True" Margin="0, 20, 0, 0"></controls:FormEntry>
+                    <controls:CheckButton Command="{Binding LoginCommand}" HorizontalOptions="End" Margin="0, 30, 0, 0"></controls:CheckButton>
+                    <controls:LabelEx FontSize="Small" Text="{Binding AppVersion}" HorizontalOptions="Center" Margin="0, 150, 0, 0" TextColor="{StaticResource AevLightGrey}"></controls:LabelEx>
+                </StackLayout>
+            </Grid>
+            <controls:AevOverlay AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" IsVisible="{Binding ShowOverlay, Mode=TwoWay}"
+                                 LoadingMessage="{Binding LoadingMessage}" IsActivityIndicatorVisible="{Binding IsActivityIndicatorVisible}"
+                                 DialogMessage="{Binding DialogMessage}" ConfirmBtnText="{Binding ConfirmBtnText}"
+                                 CancelBtnText="{Binding CancelBtnText}" ConfirmCommand="{Binding ConfirmDialogCommand}" 
+                                 CancelCommand="{Binding CancelDialogCommand}" IsDialogVisible="{Binding IsDialogVisible}"></controls:AevOverlay>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</view:PageBase>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<view:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               x:Class="AevApp.View.SetupPage"
+               xmlns:view="clr-namespace:AevApp.View;assembly=AevApp"
+               xmlns:controls="clr-namespace:AevApp.Controls;assembly=AevApp"
+               xmlns:converter="clr-namespace:AevApp.Converter;assembly=AevApp"
+               xmlns:controls1="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+               NavigationPage.HasNavigationBar="False"
+               ControlTemplate="{StaticResource BasicLayout}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:NegateBooleanConverter x:Key="inverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0,1,1" >
+                <controls:AevHeader Username="{Binding Username}" Role="{Binding Role}"
+                                TabCommand="{Binding LogoutCommand}"></controls:AevHeader>
+                <!-- <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand"> -->
+                <!--     <controls:LabelEx Text="Select a location" FontSize="Large"></controls:LabelEx> -->
+                <!-- <Picker WidthRequest="250" ItemsSource="{Binding Locations}" ItemDisplayBinding="{Binding Name}" Title="Location" SelectedItem="{Binding SelectedLocation}" Grid.Column="0"></Picker> -->
+                <!--     <controls:LabelEx TextColor="Red" Text="Please select a location to continue" IsVisible="{Binding IsLocationValid, Converter={StaticResource inverter}}"></controls:LabelEx> -->
+                <!--     <controls:ButtonEx Text="Confirm" Command="{Binding SetCommand}"></controls:ButtonEx> -->
+                <!-- </StackLayout> -->
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="800">
+                    <controls:LabelEx Text="Select location" FontSize="{StaticResource LargeText}" TextColor="{StaticResource AevDarkBlue}"
+                                  HorizontalTextAlignment="Center" Margin="0, 50, 0, 30"></controls:LabelEx>
+                    <controls1:FlowListView FlowColumnCount="1" FlowItemsSource="{Binding Locations}" FlowItemTappedCommand="{Binding SelectLocationCommand}"
+                                SeparatorVisibility="None" HasUnevenRows="false" RowHeight="56" HeightRequest="680">
+                        <controls1:FlowListView.FlowColumnTemplate>
+                            <DataTemplate>
+                                <controls:AevSelectItem Text="{Binding Name}" IsSelected="{Binding IsSelected}" BackgroundColor="{Binding BackgroundColor}"></controls:AevSelectItem>
+                                <!-- <controls:LabelEx Text="{Binding Name}"></controls:LabelEx> -->
+                            </DataTemplate>
+                        </controls1:FlowListView.FlowColumnTemplate>
+                    </controls1:FlowListView>
+
+                    <controls:CheckButton Command="{Binding SetCommand}" HorizontalOptions="Center" Margin="0, 30, 0, 30" VerticalOptions="End"
+                                      DefaultStateImageSource="CheckButtonLight.png" PressedStateImageSource="CheckButtonLightPressed.png"></controls:CheckButton>
+                </StackLayout>
+
+            </StackLayout>
+            <controls:AevOverlay AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" IsVisible="{Binding ShowOverlay, Mode=TwoWay}"
+                             LoadingMessage="{Binding LoadingMessage}" IsActivityIndicatorVisible="{Binding IsActivityIndicatorVisible}"
+                             DialogMessage="{Binding DialogMessage}" ConfirmBtnText="{Binding ConfirmBtnText}"
+                             CancelBtnText="{Binding CancelBtnText}" ConfirmCommand="{Binding ConfirmDialogCommand}" 
+                             CancelCommand="{Binding CancelDialogCommand}" IsDialogVisible="{Binding IsDialogVisible}"></controls:AevOverlay>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</view:PageBase>

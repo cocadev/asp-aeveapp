@@ -1,0 +1,31 @@
+﻿<view:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AevApp.View.RestartAgainPage"
+             xmlns:view="clr-namespace:AevApp.View;assembly=AevApp"
+             xmlns:controls="clr-namespace:AevApp.Controls;assembly=AevApp"
+             NavigationPage.HasNavigationBar="False"
+             ControlTemplate="{StaticResource BasicLayout}">
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="65"></RowDefinition>
+                </Grid.RowDefinitions>
+                <FlexLayout Grid.Row="0" Grid.Column="1" AlignItems="Center" JustifyContent="Center" Direction="Column">
+                    <controls:LabelEx FontSize="{StaticResource LargeText}"   
+                                        Text="{Binding SubmissionResultMessage}" TextColor="{StaticResource AevDarkBlue}" Margin="10"></controls:LabelEx>
+
+                    <controls:AevImageButton DefaultStateImageSource="startAgain.png" PressedStateImageSource="startAgainPressed.png"   
+                                               Command="{Binding StartAgainCommand}" Margin="30" WidthRequest="240"></controls:AevImageButton>
+                </FlexLayout>
+                <Image Grid.Row="1" Grid.Column="1" Margin="10, 0, 10, 10" Source="progressBar5.png" VerticalOptions="End"></Image>
+            </Grid>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</view:PageBase>

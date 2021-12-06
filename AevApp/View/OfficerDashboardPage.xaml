@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<view:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               x:Class="AevApp.View.OfficerDashboardPage"
+               xmlns:view="clr-namespace:AevApp.View;assembly=AevApp"
+               xmlns:controls="clr-namespace:AevApp.Controls;assembly=AevApp"
+               xmlns:converter="clr-namespace:AevApp.Converter;assembly=AevApp"
+               xmlns:helper="clr-namespace:AevApp.Helper;assembly=AevApp"
+               NavigationPage.HasNavigationBar="False"
+               ControlTemplate="{StaticResource BasicLayout}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:NegateBooleanConverter x:Key="inverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="25*" />
+                </Grid.RowDefinitions>
+                <controls:AevHeader Username="{Binding Username}" Role="{Binding Role}"
+                                TabCommand="{Binding LogoutCommand}" CancelCommand="{Binding ResetCommand}"
+                                    ShowCancel="True" Grid.Row="0"/>
+
+
+                <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"
+                             IsVisible="{Binding PhotoTaken, Converter={StaticResource inverter}}">
+
+                    <controls:StartAevButton Command="{Binding ManualScanCommand}" Margin="0,-50,0,0"
+                                             VerticalOptions="Center" HorizontalOptions="Center" 
+                                             IsVisible="{Binding IsTakingPhoto, Converter={StaticResource inverter}}"/>
+
+                     <controls:AevImageButton Command="{Binding AddVpCommand}" Margin="0,50,0,0" 
+                                        VerticalOptions="Center" HorizontalOptions="Center" DefaultStateImageSource="AddVP.png" 
+                                              PressedStateImageSource="AddVPPressed.png" WidthRequest="240" HeightRequest="107" 
+                                              IsVisible="{Binding IsTakingPhoto, Converter={StaticResource inverter}}"/> 
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"
+                             IsVisible="{Binding PhotoTaken, Converter={StaticResource inverter}}">
+
+                    <Grid IsVisible="{Binding IsTakingPhoto}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="8*"></ColumnDefinition>
+                            <ColumnDefinition Width="51*"></ColumnDefinition>
+                            <ColumnDefinition Width="8*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="16*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <controls:BackgroundBoxView CornerRadius="12" Grid.Column="1" Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                                    StartColor="{StaticResource AevBlueGrey}" EndColor="{StaticResource AevLightGrey}" 
+                                                    IsVisible="{Binding ShowDefaultCameraBorder}"></controls:BackgroundBoxView>
+                        <controls:BackgroundBoxView CornerRadius="12" Grid.Column="1" Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                                    StartColor="{StaticResource AevRed}" EndColor="{StaticResource AevLightRed}" 
+                                                    IsVisible="{Binding ShowTakingCameraBorder}"></controls:BackgroundBoxView>
+                        <controls:BackgroundBoxView CornerRadius="12" Grid.Column="1" Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                                    StartColor="{StaticResource AevGreen}" EndColor="{StaticResource AevLightGreen}" 
+                                                    IsVisible="{Binding ShowCompleteCameraBorder}"></controls:BackgroundBoxView>
+                        <controls:CameraView Grid.Column="1" Grid.Row="0" HeightRequest="640" Camera="Rear" HorizontalOptions="FillAndExpand" 
+                                         IsTakingPhoto="{Binding IsTakingPhoto}" NumberOfPhotoExpected="2"
+                                         OnPhotoCommand="{Binding SavePhotoCommand}" CaptureOnTap="False" TakePhotoTrigger="{Binding PhotoTrigger}"
+                                         FlashSwitcher="{Binding FlashSwitcher}" Margin="8"/>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Row="1" Grid.Column="1">
+                            <controls:LabelEx HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" FontSize="{StaticResource LargeText}" 
+                                          Text="Take photo of the " TextColor="{StaticResource AevDarkBlue}"></controls:LabelEx>
+                            <controls:LabelEx HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="{StaticResource LargeText}" 
+                                          FontAttributes="Bold" FontFamily="{StaticResource OpenSansBold}" TextColor="{StaticResource AevDarkBlue}" Text="{Binding PhotoInstruction}"></controls:LabelEx>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Transparent"
+                                     Grid.Row="2" Grid.Column="1">
+
+                            <controls:CameraButton Command="{Binding TriggerPhotoTakingCommand}" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" 
+                                              IsVisible="{Binding IsTakingPhoto}" CurrentState="{Binding CameraCurrentState}" Margin="0, 0, 160, 0"></controls:CameraButton>
+
+                            <FlexLayout Direction="Column" HorizontalOptions="End" VerticalOptions="Center" 
+                                        AlignContent="Center" AlignItems="Center" JustifyContent="Center">
+                                <controls:FlashButton Command="{Binding SwitchFlashCommand}" CurrentState="{Binding FlashCurrentState}"></controls:FlashButton>
+                                <controls:LabelEx Text="{Binding FlashCurrentStateDisplay}" FontSize="{StaticResource SmallText}" TextColor="{StaticResource AevLightGrey}"></controls:LabelEx>
+                            </FlexLayout>
+                        </StackLayout>
+
+                        <Image Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="10, 0, 10, 0" Source="{Binding ProgressImage}"></Image>
+                    </Grid>
+
+                </StackLayout>
+
+                <Grid Grid.Row="1" VerticalOptions="FillAndExpand" IsVisible="{Binding PhotoTaken}" Grid.RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="450"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="10"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <!-- <StackLayout Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" Orientation="Horizontal"> -->
+                    <!--     <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand"> -->
+                    <!--         <controls:FormEntry Title="Enter ASIC ID" WidthRequest="250" -->
+                    <!--                         Text="{Binding AsicId, Mode=TwoWay}" -->
+                    <!--                         IsValid="{Binding IsAsicIdValid, Mode=TwoWay}" -->
+                    <!--                         ErrorMessage="Asic Id not found. Try again."/> -->
+                    <!--     </StackLayout> -->
+                    <!--     <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" Padding="0, 0, 0, 15"> -->
+                    <!--         <controls:ButtonEx Text="&#xf00c;" FontFamily="{StaticResource FontAwesome}" Command="{Binding GetAsicInfoCommand}" HeightRequest="42"></controls:ButtonEx> -->
+                    <!--     </StackLayout> -->
+                    <!-- </StackLayout> -->
+
+                    <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="18"></ColumnDefinition>
+                            <ColumnDefinition Width="65"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <controls:LabelEx Grid.Row="0" FontSize="{StaticResource LargeText}" TextColor="{StaticResource AevDarkBlue}"
+                                          Text="Enter ASIC ID"></controls:LabelEx>
+
+                        <controls:FormEntry Grid.Row="1" Grid.Column="0" Text="{Binding AsicId, Mode=TwoWay}" IsValid="{Binding IsAsicIdValid, Mode=TwoWay}"
+                                            ErrorMessage="Asic Id not found. Try again." TextColor="{StaticResource AevDarkBlue}" HasTitle="False"></controls:FormEntry>
+
+                        <controls:CheckButton Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Command="{Binding GetAsicInfoCommand}" HorizontalOptions="Center" VerticalOptions="Center"
+                                              DefaultStateImageSource="CheckButtonLight.png" PressedStateImageSource="CheckButtonLightPressed.png"
+                                              HeightRequest="60"></controls:CheckButton>
+                    </Grid>
+
+                    <Image Source="{Binding PersonPhotoImageSource}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Grid.Column="1"/>
+                    <Image Source="{Binding AsicPhotoImageSource}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Grid.Column="2" />
+                    <controls:AevImageButton HorizontalOptions="Start" VerticalOptions="Start" Grid.Row="2" Grid.Column="1" 
+                                             Command="{Binding CancelCommand}"  HeightRequest="60"
+                                             DefaultStateImageSource="Retake.png" PressedStateImageSource="RetakePressed.png"></controls:AevImageButton>
+                    <Image Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="0, 0, 0, 10" Source="{Binding ProgressImage}" VerticalOptions="End"></Image>
+                </Grid>
+            </Grid>
+            <controls:AevOverlay AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" IsVisible="{Binding ShowOverlay, Mode=TwoWay}"
+                                 LoadingMessage="{Binding LoadingMessage}" IsActivityIndicatorVisible="{Binding IsActivityIndicatorVisible}"
+                                 DialogMessage="{Binding DialogMessage}" ConfirmBtnText="{Binding ConfirmBtnText}"
+                                 CancelBtnText="{Binding CancelBtnText}" ConfirmCommand="{Binding ConfirmDialogCommand}" 
+                                 CancelCommand="{Binding CancelDialogCommand}" IsDialogVisible="{Binding IsDialogVisible}"></controls:AevOverlay>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</view:PageBase>
